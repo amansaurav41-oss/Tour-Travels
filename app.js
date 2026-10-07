@@ -1,5 +1,5 @@
 /**
- * Shipra Travels - Interactive Web Application Logic
+ * Aman Travels - Interactive Web Application Logic
  * Implements smooth UI transitions, state validations, carousels, and forms.
  */
 
