@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shipra Travels - Premium Tour & Travel Agency in India. Experience tailor-made holiday packages, flight bookings, and hotels with 24/7 dedicated support.">
+    <title>Premium Tour & Travel Agency</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header" id="mainHeader">
+        <div class="container navbar-container">
+            <a href="#" class="logo" id="logo">
+                <i class="fa-solid fa-plane-departure logo-icon"></i>
+                <span class="logo-text">WORLD<span class="accent-text">TRAVELS</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#destinations" class="nav-link">Domestic Packages <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#destinations" onclick="filterPackages('domestic')">Himachal Pradesh</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('domestic')">Goa Beach Tour</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('domestic')">Kerala Backwaters</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('domestic')">Kashmir Valley</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('domestic')">Andaman Islands</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#destinations" class="nav-link">International Packages <i class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#destinations" onclick="filterPackages('international')">Dubai Luxe</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('international')">Maldives Escape</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('international')">Thailand Explorer</a></li>
+                            <li><a href="#destinations" onclick="filterPackages('international')">Bali Retreat</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#planner" class="nav-link">Customize Trip</a></li>
+                    <li><a href="#blogs" class="nav-link">Travel Blogs</a></li>
+                    <li><a href="#contact" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-ctas">
+                <a href="tel:+918558855888" class="phone-badge" id="phoneBadge">
+                    <div class="phone-icon-wrapper">
+                        <i class="fa-solid fa-headset phone-icon"></i>
+                    </div>
+                    <div class="phone-text">
+                        <span class="phone-label">24/7 Concierge</span>
+                        <span class="phone-number">+91 85588 55888</span>
+                    </div>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars-staggered hamburger"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="heroSection">
+        <div class="hero-bg-carousel" id="heroCarousel">
+            <!-- Background slides will scroll dynamically via JS -->
+            <div class="hero-slide active" style="background-image: linear-gradient(rgba(7, 11, 19, 0.5), rgba(7, 11, 19, 0.85)), url('assets/hero_bg1.jpg');"></div>
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(7, 11, 19, 0.5), rgba(7, 11, 19, 0.85)), url('assets/hero_bg2.jpg');"></div>
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(7, 11, 19, 0.5), rgba(7, 11, 19, 0.85)), url('assets/hero_bg3.jpg');"></div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-text-block">
+                <span class="hero-tagline"><i class="fa-solid fa-compass spin-compass"></i> Leave the Planning to Us</span>
+                <h1 class="hero-title">Explore the World <br>With <span class="glow-text">Extraordinary</span> Comfort</h1>
+                <p class="hero-subtitle">Crafting personalized tour itineraries, seamless flights, and handpicked stays. Chandigarh Tricity's most awarded travel planner.</p>
+            </div>
+
+            <!-- Booking Search Widget -->
+            <div class="search-widget" id="searchWidget">
+                <div class="widget-tabs">
+                    <button class="tab-btn active" data-tab="holidays" id="tabHolidays"><i class="fa-solid fa-suitcase"></i> Holidays</button>
+                    <button class="tab-btn" data-tab="flights" id="tabFlights"><i class="fa-solid fa-plane"></i> Flights</button>
+                    <button class="tab-btn" data-tab="hotels" id="tabHotels"><i class="fa-solid fa-hotel"></i> Hotels</button>
+                </div>
+                
+                <div class="widget-content">
+                    <!-- Holidays Form -->
+                    <form id="formHolidays" class="widget-form active">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="holidayDest"><i class="fa-solid fa-location-dot"></i> Destination</label>
+                                <input type="text" id="holidayDest" placeholder="e.g. Bali, Goa, Maldives" required autocomplete="off">
+                            </div>
+                            <div class="input-group">
+                                <label for="holidayMonth"><i class="fa-solid fa-calendar-days"></i> Month of Travel</label>
+                                <select id="holidayMonth">
+                                    <option value="august-2026">August 2026</option>
+                                    <option value="september-2026">September 2026</option>
+                                    <option value="october-2026">October 2026</option>
+                                    <option value="november-2026">November 2026</option>
+                                    <option value="december-2026">December 2026</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="holidayDuration"><i class="fa-solid fa-clock"></i> Duration</label>
+                                <select id="holidayDuration">
+                                    <option value="short">3 - 5 Days</option>
+                                    <option value="medium">6 - 9 Days</option>
+                                    <option value="long">10+ Days</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn" id="btnHolidaysSearch">
+                                <span class="btn-content">Search Tours <i class="fa-solid fa-arrow-right"></i></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Flights Form -->
+                    <form id="formFlights" class="widget-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="flightFrom"><i class="fa-solid fa-plane-departure"></i> Origin</label>
+                                <input type="text" id="flightFrom" placeholder="City or Airport (e.g. IXC)" required autocomplete="off">
+                            </div>
+                            <div class="input-group">
+                                <label for="flightTo"><i class="fa-solid fa-plane-arrival"></i> Destination</label>
+                                <input type="text" id="flightTo" placeholder="City or Airport (e.g. DEL)" required autocomplete="off">
+                            </div>
+                            <div class="input-group">
+                                <label for="flightDate"><i class="fa-solid fa-calendar"></i> Date</label>
+                                <input type="date" id="flightDate" required min="2026-08-02">
+                            </div>
+                            <button type="submit" class="submit-btn" id="btnFlightsSearch">
+                                <span class="btn-content">Search Flights <i class="fa-solid fa-arrow-right"></i></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Hotels Form -->
+                    <form id="formHotels" class="widget-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="hotelLocation"><i class="fa-solid fa-building"></i> Where to?</label>
+                                <input type="text" id="hotelLocation" placeholder="City, Hotel, or Area" required autocomplete="off">
+                            </div>
+                            <div class="input-group">
+                                <label for="hotelCheckIn"><i class="fa-solid fa-calendar-check"></i> Check-in</label>
+                                <input type="date" id="hotelCheckIn" required min="2026-08-02">
+                            </div>
+                            <div class="input-group">
+                                <label for="hotelGuests"><i class="fa-solid fa-users"></i> Guests</label>
+                                <select id="hotelGuests">
+                                    <option value="1">1 Room, 1 Adult</option>
+                                    <option value="2" selected>1 Room, 2 Adults</option>
+                                    <option value="3">1 Room, 3 Adults</option>
+                                    <option value="family">2 Rooms, Family</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn" id="btnHotelsSearch">
+                                <span class="btn-content">Search Hotels <i class="fa-solid fa-arrow-right"></i></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credibility Stats Ribbon -->
+    <section class="stats-section" id="statsSection">
+        <div class="container stats-grid">
+            <div class="stat-card">
+                <h3 class="stat-number">15+</h3>
+                <p class="stat-label">Years of Travel Excellence</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">50K+</h3>
+                <p class="stat-label">Happy Travelers Guided</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">250+</h3>
+                <p class="stat-label">Curated Holiday Packages</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">24/7</h3>
+                <p class="stat-label">Dedicated On-trip Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations-section" id="destinations">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Featured Getaways</span>
+                <h2 class="section-title">Popular Holiday Packages</h2>
+                <p class="section-desc">Handcrafted itineraries featuring signature stays, guided sightseeing, and flexible dates.</p>
+                
+                <!-- Package Filters -->
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" id="filterAll">All Packages</button>
+                    <button class="filter-btn" data-filter="domestic" id="filterDomestic">Domestic India</button>
+                    <button class="filter-btn" data-filter="international" id="filterInternational">International</button>
+                </div>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="packages-grid" id="packagesGrid">
+                
+                <!-- Card 1: Shimla & Manali (Domestic) -->
+                <div class="package-card" data-category="domestic" id="pkgShimla">
+                    <div class="card-image-wrapper">
+                        <img src="assets/shimla.jpg" alt="Shimla Hills" class="card-image">
+                        <span class="card-tag">Domestic</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.8</span>
+                        </div>
+                        <h3 class="card-title">Himachal Paradise (Shimla & Manali)</h3>
+                        <p class="card-text">Explore pine forests, snow-clad peaks, Mall road walks, and Solang Valley excursions.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹14,999</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Himachal Paradise (Shimla & Manali)', '₹14,999')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Goa (Domestic) -->
+                <div class="package-card" data-category="domestic" id="pkgGoa">
+                    <div class="card-image-wrapper">
+                        <img src="assets/goa.jpg" alt="Goa Beaches" class="card-image">
+                        <span class="card-tag">Domestic</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 4 Days / 3 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Vibrant Goa Beach Getaway</h3>
+                        <p class="card-text">Relax on white beaches, explore Portuguese forts, and enjoy spectacular cruises.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹11,499</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Vibrant Goa Beach Getaway', '₹11,499')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Kerala (Domestic) -->
+                <div class="package-card" data-category="domestic" id="pkgKerala">
+                    <div class="card-image-wrapper">
+                        <img src="assets/kerala.jpg" alt="Kerala Backwaters" class="card-image">
+                        <span class="card-tag">Domestic</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Kerala Serene Backwaters</h3>
+                        <p class="card-text">Cruise Munnar tea hills, houseboat rides in Alleppey, and heritage walks in Fort Kochi.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹18,500</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Kerala Serene Backwaters', '₹18,500')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Kashmir (Domestic) -->
+                <div class="package-card" data-category="domestic" id="pkgKashmir">
+                    <div class="card-image-wrapper">
+                        <img src="assets/kashmir.jpg" alt="Kashmir Dal Lake" class="card-image">
+                        <span class="card-tag">Domestic</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 5.0</span>
+                        </div>
+                        <h3 class="card-title">Kashmir Valley Paradise</h3>
+                        <p class="card-text">Enjoy Dal Lake Shikara cruises, explore Gulmarg gondola rides and Pahalgam valleys.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹22,999</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Kashmir Valley Paradise', '₹22,999')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Dubai (International) -->
+                <div class="package-card" data-category="international" id="pkgDubai">
+                    <div class="card-image-wrapper">
+                        <img src="assets/dubai.jpg" alt="Dubai City" class="card-image">
+                        <span class="card-tag">International</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.7</span>
+                        </div>
+                        <h3 class="card-title">Dubai Luxury Skylines</h3>
+                        <p class="card-text">Visit Burj Khalifa, experience thrilling desert safaris, and shop at Dubai Mall.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹49,999</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Dubai Luxury Skylines', '₹49,999')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Maldives (International) -->
+                <div class="package-card" data-category="international" id="pkgMaldives">
+                    <div class="card-image-wrapper">
+                        <img src="assets/maldives.jpg" alt="Maldives Resort" class="card-image">
+                        <span class="card-tag">International</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 4 Days / 3 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Maldives Exotic Retreat</h3>
+                        <p class="card-text">Stay in luxury overwater villas, snorkel inside lagoons, and dine by the ocean.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹65,000</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Maldives Exotic Retreat', '₹65,000')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Thailand (International) -->
+                <div class="package-card" data-category="international" id="pkgThailand">
+                    <div class="card-image-wrapper">
+                        <img src="assets/thailand.jpg" alt="Thailand Temples" class="card-image">
+                        <span class="card-tag">International</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.8</span>
+                        </div>
+                        <h3 class="card-title">Thailand Beach & Temples</h3>
+                        <p class="card-text">Tour the grand sights of Bangkok, relax in Phuket, and cruise Coral Islands in Pattaya.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹32,999</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Thailand Beach & Temples', '₹32,999')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Bali (International) -->
+                <div class="package-card" data-category="international" id="pkgBali">
+                    <div class="card-image-wrapper">
+                        <img src="assets/bali.jpg" alt="Bali Temples" class="card-image">
+                        <span class="card-tag">International</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Bali Spiritual & Scenic Escape</h3>
+                        <p class="card-text">Visit Ubud rice terraces, Uluwatu cliff temple sunsets, and Nusa Penida island shores.</p>
+                        <div class="card-pricing-footer">
+                            <div class="price-block">
+                                <span class="price-label">Starting from</span>
+                                <span class="price-value">₹39,500</span>
+                            </div>
+                            <button class="book-btn" onclick="openBookingModal('Bali Spiritual & Scenic Escape', '₹39,500')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us" id="whyChooseUs">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Why Choose Us</span>
+                <h2 class="section-title">Designed For Seamless Travels</h2>
+                <p class="section-desc">Experience worry-free travel where every itinerary detail is carefully polished by certified specialists.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>24/7 Concierge Support</h3>
+                    <p>Access our responsive multi-channel support team mid-trip, whenever and wherever you need assistance.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h3>Dedicated Travel Experts</h3>
+                    <p>Our experienced agents have in-depth regional knowledge to suggest local hidden gems and customized paths.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3>Affordable Itineraries</h3>
+                    <p>Leverage our partnerships with international airlines and wholesale luxury hotel groups for the best industry rates.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon-box">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3>Tailor-Made Experiences</h3>
+                    <p>No cookie-cutter trips. You define the pace, activity level, dietary requirements, and stay categories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Custom Trip Planner (Wizard) -->
+    <section class="planner-section" id="planner">
+        <div class="container">
+            <div class="planner-container">
+                <div class="planner-info">
+                    <span class="sub-heading text-left">Custom Quote</span>
+                    <h2 class="section-title text-left">Design Your Tailor-Made Vacation</h2>
+                    <p class="planner-desc">Tell us your vacation style, preferences, and details. Our certified experts will craft a personalized itinerary and share a custom quote within 24 hours.</p>
+                    
+                    <div class="planner-benefits">
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-check"></i>
+                            <span>100% Flexible & Customizable</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Includes flights, hotels & transfers</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fa-solid fa-check"></i>
+                            <span>No booking obligation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="planner-card">
+                    <!-- Progress Bar -->
+                    <div class="progress-bar-container">
+                        <div class="progress-line" id="progressLine"></div>
+                        <div class="progress-steps">
+                            <div class="step-dot active" data-step="1">1</div>
+                            <div class="step-dot" data-step="2">2</div>
+                            <div class="step-dot" data-step="3">3</div>
+                            <div class="step-dot" data-step="4">4</div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-step Form -->
+                    <form id="tripPlannerForm" class="planner-form">
+                        
+                        <!-- Step 1: Destination -->
+                        <div class="form-step active" data-step="1">
+                            <h3 class="step-title">Where do you want to explore?</h3>
+                            <div class="planner-input-group">
+                                <label>Select Destination Scope</label>
+                                <div class="radio-card-grid">
+                                    <label class="radio-card">
+                                        <input type="radio" name="scope" value="domestic" checked>
+                                        <div class="radio-content">
+                                            <i class="fa-solid fa-map-location-dot"></i>
+                                            <span>Domestic (India)</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="scope" value="international">
+                                        <div class="radio-content">
+                                            <i class="fa-solid fa-earth-americas"></i>
+                                            <span>International</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="planner-input-group">
+                                <label for="planDest">Specific Target Country/City</label>
+                                <input type="text" id="planDest" placeholder="e.g. Kerala, Switzerland, Ladakh" required>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Date & Duration -->
+                        <div class="form-step" data-step="2">
+                            <h3 class="step-title">When are you looking to fly?</h3>
+                            <div class="planner-input-group">
+                                <label for="planDate">Approximate Departure Date</label>
+                                <input type="date" id="planDate" min="2026-08-02">
+                            </div>
+                            <div class="planner-input-group">
+                                <label>Duration of Holiday</label>
+                                <div class="radio-card-grid grid-3">
+                                    <label class="radio-card">
+                                        <input type="radio" name="duration" value="short" checked>
+                                        <div class="radio-content small-card">
+                                            <span>3-5 Days</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="duration" value="medium">
+                                        <div class="radio-content small-card">
+                                            <span>6-9 Days</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="duration" value="long">
+                                        <div class="radio-content small-card">
+                                            <span>10+ Days</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Travelers & Budget -->
+                        <div class="form-step" data-step="3">
+                            <h3 class="step-title">Who is traveling and what is the budget?</h3>
+                            <div class="planner-input-group">
+                                <label for="planTravelers">Traveler Setup</label>
+                                <select id="planTravelers">
+                                    <option value="solo">Solo Adventure</option>
+                                    <option value="couple" selected>Couple (Honeymoon/Leisure)</option>
+                                    <option value="family">Family Package</option>
+                                    <option value="group">Large Group / Corporate</option>
+                                </select>
+                            </div>
+                            <div class="planner-input-group">
+                                <label>Budget Tier per Person</label>
+                                <div class="radio-card-grid grid-3">
+                                    <label class="radio-card">
+                                        <input type="radio" name="budget" value="economy" checked>
+                                        <div class="radio-content small-card">
+                                            <span>Budget Friendly</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="budget" value="premium">
+                                        <div class="radio-content small-card">
+                                            <span>Premium Quality</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="budget" value="luxury">
+                                        <div class="radio-content small-card">
+                                            <span>Ultra Luxury</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Contact Details -->
+                        <div class="form-step" data-step="4">
+                            <h3 class="step-title">Provide your contact details</h3>
+                            <div class="planner-input-group">
+                                <label for="planName">Full Name</label>
+                                <input type="text" id="planName" placeholder="Enter your name" required>
+                            </div>
+                            <div class="planner-input-group">
+                                <label for="planEmail">Email Address</label>
+                                <input type="email" id="planEmail" placeholder="Enter your email" required>
+                            </div>
+                            <div class="planner-input-group">
+                                <label for="planPhone">Phone Number</label>
+                                <input type="tel" id="planPhone" placeholder="Enter mobile number" required>
+                            </div>
+                        </div>
+
+                        <!-- Form Navigation Buttons -->
+                        <div class="form-navigation">
+                            <button type="button" class="nav-prev-btn disabled" id="btnPlanPrev" disabled><i class="fa-solid fa-angle-left"></i> Previous</button>
+                            <button type="button" class="nav-next-btn" id="btnPlanNext">Next <i class="fa-solid fa-angle-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Slider Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Guest Stories</span>
+                <h2 class="section-title">Words From Our Travelers</h2>
+                <p class="section-desc">Real journeys shared by travelers who explored with Shipra Travels.</p>
+            </div>
+
+            <!-- Testimonial Slider Wrapper -->
+            <div class="testimonial-slider-container">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide-card active">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">"Our family trip to Shimla and Manali was absolutely seamless! The customized itinerary gave us exactly what we wanted - leisure mornings and adventurous afternoons. The 24/7 hotline helped us re-book an excursion in Solang without any stress. Highly recommend Shipra!"</p>
+                        <div class="reviewer-meta">
+                            <div class="reviewer-initials">AB</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Amrinder Bedi</h4>
+                                <span class="reviewer-loc">Chandigarh, India</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide-card">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">"Had an amazing honeymoon trip to the Maldives. The luxury resort booking, private airport transfers, and beach dinner set up by the team was incredible. Everything was handled perfectly. Shipra Travels is the best agency in Panchkula."</p>
+                        <div class="reviewer-meta">
+                            <div class="reviewer-initials">RR</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Renu Rathour</h4>
+                                <span class="reviewer-loc">Panchkula, India</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide-card">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i>
+                        </div>
+                        <p class="review-text">"I book all my flight tickets to the US through Superfares and Shipra. They secure wholesale discounts and handle sudden cancellations. They provide great booking support. I recommend their flight booking assistance."</p>
+                        <div class="reviewer-meta">
+                            <div class="reviewer-initials">SM</div>
+                            <div class="reviewer-details">
+                                <h4 class="reviewer-name">Suzi Martin</h4>
+                                <span class="reviewer-loc">Chicago, USA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Indicators -->
+                <div class="slider-dots" id="sliderDots">
+                    <button class="slider-dot active" data-index="0" aria-label="Slide 1"></button>
+                    <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+                    <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands & Awards Section -->
+    <section class="brands-section" id="brands">
+        <div class="container">
+            <h3 class="brands-title">Our Sister Brands & Affiliations</h3>
+            <div class="brands-grid">
+                <div class="brand-item">
+                    <i class="fa-solid fa-plane-up"></i>
+                    <span>Superfares</span>
+                </div>
+                <div class="brand-item">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>MyTicketsToIndia</span>
+                </div>
+                <div class="brand-item">
+                    <i class="fa-solid fa-earth-asia"></i>
+                    <span>Travanya</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Blogs Section -->
+    <section class="blogs-section" id="blogs">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Read & Inspire</span>
+                <h2 class="section-title">Latest Travel Guides</h2>
+                <p class="section-desc">Tips, checklists, and guidebooks curated by our seasoned destination experts.</p>
+            </div>
+
+            <div class="blogs-grid">
+                <!-- Blog 1 -->
+                <article class="blog-card" id="blog1">
+                    <div class="blog-image-wrapper">
+                        <img src="assets/blog_shimla.jpg" alt="Shimla travel guide" class="blog-image">
+                        <span class="blog-category">Guide</span>
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> July 28, 2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">10 Hidden Valley Spots in Himachal Pradesh You Must See</a></h3>
+                        <p class="blog-text">Ditch the crowded streets. Explore isolated cedar woods, pristine valleys, and home-stays around Shimla and Manali.</p>
+                    </div>
+                </article>
+
+                <!-- Blog 2 -->
+                <article class="blog-card" id="blog2">
+                    <div class="blog-image-wrapper">
+                        <img src="assets/blog_maldives.jpg" alt="Maldives honeymoon guide" class="blog-image">
+                        <span class="blog-category">Honeymoon</span>
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> June 15, 2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 7 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">Planning The Perfect Romantic Escape to Maldives: A Complete Guide</a></h3>
+                        <p class="blog-text">Everything you need to know about sea-planes, selecting water villas, sunset cruises, and budget planning tips.</p>
+                    </div>
+                </article>
+
+                <!-- Blog 3 -->
+                <article class="blog-card" id="blog3">
+                    <div class="blog-image-wrapper">
+                        <img src="assets/blog_bali.jpg" alt="Bali travel guide" class="blog-image">
+                        <span class="blog-category">Adventure</span>
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> May 29, 2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">Bali Itinerary: The Ultimate 6-Day Adventure & Spiritual Journey</a></h3>
+                        <p class="blog-text">A day-by-day blueprint covering Ubud temples, Mt. Batur sunrise hike, Nusa Penida cliffs, and beach club stays.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us & Footer Section -->
+    <footer class="contact-section" id="contact">
+        <div class="container footer-grid">
+            
+            <!-- Contact Details -->
+            <div class="footer-info">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-plane-departure logo-icon"></i>
+                    <span class="logo-text">SHIPRA <span class="accent-text">TRAVELS</span></span>
+                </a>
+                <p class="footer-desc">Providing tailored travel solutions since 2009. From quick flight tickets to luxury retreats across the globe.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h4>Our Headquarters</h4>
+                            <p>SCO 22, IT Park Rd, Sector 22, Panchkula, Haryana 134109 (Chandigarh Tricity)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Call Booking Desk</h4>
+                            <p><a href="tel:+918558855888">+91 85588 55888</a> / <a href="tel:+911724635900">+91 172 463 5900</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>Email Queries</h4>
+                            <p><a href="mailto:info@shipratravels.com">info@shipratravels.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Styled Visual Map Representation -->
+                <div class="visual-map-block" id="visualMapBlock">
+                    <div class="map-placeholder">
+                        <i class="fa-solid fa-map-location map-icon"></i>
+                        <span>SCO 22, IT Park, Sector 22, Panchkula</span>
+                        <a href="https://maps.google.com/?cid=16767395123118093961" target="_blank" class="map-link">View Live Map <i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact/Query Form -->
+            <div class="footer-form-wrapper">
+                <h3>Send Us A Message</h3>
+                <p>Have questions about bookings or custom itineraries? Send us a note and our agents will respond.</p>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="contactName">Name</label>
+                            <input type="text" id="contactName" placeholder="Enter name" required autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" placeholder="Enter email" required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" placeholder="Enter phone number" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="contactMessage">Your Message</label>
+                        <textarea id="contactMessage" rows="4" placeholder="How can we assist you with your travels?" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn full-width" id="btnContactSubmit">
+                        <span class="btn-content">Submit Inquiry <i class="fa-solid fa-paper-plane"></i></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sub Footer -->
+        <div class="sub-footer">
+            <div class="container sub-footer-content">
+                <p>&copy; 2026 Shipra Travels. All rights reserved. Designed with custom premium styles.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-card">
+            <button class="modal-close" id="modalCloseBtn" aria-label="Close Modal">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-compass modal-header-icon"></i>
+                <h3 id="modalTitle">Request Holiday Booking</h3>
+                <p id="modalSubtitle">Configure your getaway and request a call from our booking desk.</p>
+            </div>
+            
+            <form id="modalBookingForm" class="modal-form">
+                <input type="hidden" id="modalPkgName">
+                
+                <div class="modal-form-group">
+                    <label for="modalDate">Preferred Travel Date</label>
+                    <input type="date" id="modalDate" required min="2026-08-02">
+                </div>
+                
+                <div class="form-row">
+                    <div class="modal-form-group">
+                        <label for="modalAdults">Adults (12+ yrs)</label>
+                        <input type="number" id="modalAdults" value="2" min="1" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="modalChildren">Children (2-11 yrs)</label>
+                        <input type="number" id="modalChildren" value="0" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label for="modalPhone">Contact Mobile Number</label>
+                    <input type="tel" id="modalPhone" placeholder="Enter mobile number" required>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label for="modalNotes">Special Notes or Requests</label>
+                    <textarea id="modalNotes" rows="2" placeholder="e.g. Vegetarian food, pool villa request, flight bookings needed"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn full-width" id="btnModalSubmit">
+                    <span class="btn-content">Confirm Request <i class="fa-solid fa-check"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast System -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
